@@ -1,0 +1,12 @@
+{
+  "name": "shapes-renderer",
+  "version-string": "0.1.0",
+  "description": "Test task",
+  "homepage": "https://github.com/fromasmtodisasm/ShapesRenderer",
+  "dependencies": [
+    "glad",
+    "sdl2",
+    "glm",
+    "sdl2"
+  ]
+}
