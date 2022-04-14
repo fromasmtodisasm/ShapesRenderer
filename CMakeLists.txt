@@ -8,5 +8,11 @@ set(CMAKE_TOOLCHAIN_FILE vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "CM
 
 project ("ShapesRenderer")
 
+
 # Include sub-projects.
 add_subdirectory ("ShapesRenderer")
+
+if(MSVC)
+  target_compile_options(ShapesRenderer PUBLIC "/ZI")
+  target_link_options(ShapesRenderer PUBLIC "/INCREMENTAL")
+endif()

@@ -7,6 +7,15 @@
     "glad",
     "sdl2",
     "glm",
-    "sdl2"
+    "sdl2",
+    "opengl",
+    {
+      "name": "imgui",
+      "features": [
+        "opengl2-binding",
+        "sdl2-binding"
+      ]
+    }
+
   ]
 }
