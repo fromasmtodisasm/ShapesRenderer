@@ -60,7 +60,7 @@ public:
 	Vec4 ViewPort;
 
 	// Constructor with vectors
-	CCamera(glm::vec3 position = glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = -90.f, float pitch = PITCH, Vec3 Front = Vec3{ 0,0,1 })
+	CCamera(glm::vec3 position = glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = -90.f, float pitch = PITCH, Vec3 Front = Vec3{ 0,0,-1 })
 		: MovementSpeed(10.f)
 		, Zoom(ZOOM)
 	{
@@ -68,7 +68,7 @@ public:
 		this->WorldUp = up;
 		this->transform.Rotation.y = yaw;
 		this->transform.Rotation.x = pitch;
-		this->updateCameraVectors();
+		this->UpdateCameraVectors();
 	}
 	// Constructor with scalar values
 	CCamera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)
@@ -80,12 +80,12 @@ public:
 		this->WorldUp = glm::vec3(upX, upY, upZ);
 		this->transform.Rotation.y = yaw;
 		this->transform.Rotation.x = pitch;
-		this->updateCameraVectors();
+		this->UpdateCameraVectors();
 	}
 
 	void Update()
 	{
-		updateCameraVectors();
+		UpdateCameraVectors();
 	}
 
 	void Init(int width, int height, float fov = 45.f)
@@ -154,11 +154,11 @@ public:
 		}
 
 		// Update Front, Right and Up Vectors using the updated Eular angles
-		updateCameraVectors();
+		UpdateCameraVectors();
 	}
 	void ProcessKeyboard(Movement direction, float deltaTime, float value)
 	{
-		float velocity = deltaTime * value;
+		float velocity = 0.01f * deltaTime * value;
 		mode = CCamera::Mode::FLY;
 
 		auto moveForward = glm::vec3(
@@ -182,15 +182,12 @@ public:
 		{
 			m_MoveDirection = -Right;
 		}
-		//m_MoveDirection = glm::normalize(m_MoveDirection);
-		//m_MoveDirection *= velocity;
 		transform.Position += velocity * m_MoveDirection;
-		//minecraft->player.move(m_MoveDirection, MovementSpeed * velocity);
 	}
 
 
 	// Calculates the front vector from the Camera's (updated) Eular Angles
-	void updateCameraVectors()
+	void UpdateCameraVectors()
 	{
 		// Calculate the new Front vector
 		glm::vec3 front;

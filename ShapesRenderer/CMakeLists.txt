@@ -23,6 +23,4 @@ endif()
       find_package(imgui CONFIG REQUIRED)
       target_link_libraries(ShapesRenderer PRIVATE imgui::imgui)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /ZI /EDITANDCONTINUE")
-
 # TODO: Add tests and install targets if needed.
